@@ -5,6 +5,11 @@ discord server copy paster (cloner) without any admin permissions
 
 Yux !!!
 
+# What is it ?
+
+with this tool you can copy paste every server you want to your server without any permissions / bot
+
+
 # Requirement (IMPORTANT)
 
 before using do :
