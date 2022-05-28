@@ -5,6 +5,13 @@ discord server copy paster (cloner) without any admin permissions
 
 Yux !!!
 
+# Requirement (IMPORTANT)
+
+before using do :
+
+pip install -r requirements.txt
+in a cmd at the same directory
+
 # How To Use
 
 1 - change token in config.json
