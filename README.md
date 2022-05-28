@@ -10,6 +10,7 @@ Yux !!!
 before using do :
 
 pip install -r requirements.txt
+
 in a cmd at the same directory
 
 # How To Use
