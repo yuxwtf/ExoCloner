@@ -18,8 +18,8 @@ bot = commands.Bot(command_prefix='server cloner made by yuxontop on github')
 
 
 
-tocopy = input('server you want to copy : ')
-topaste = input('server you want to paste in : ')
+tocopy = input('guild id you want to copy >> ')
+topaste = input('guild id you want to paste in >> ')
 
 
 scrapped_channel = []
