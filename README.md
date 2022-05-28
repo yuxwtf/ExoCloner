@@ -7,7 +7,7 @@ Yux !!!
 
 # What is it ?
 
-with this tool you can copy paste every server you want to your server without any permissions / bot
+with this tool you can copy paste every discord server you want to your server without any permissions / bot
 
 
 # Requirement (IMPORTANT)
