@@ -6,9 +6,11 @@ import requests
 import json
 from discord.ext import commands
 from colorama import Fore, Back, Style, init
+import discord.utils
 init()
 
 tocopy = 000
+overwrites_to = {}
 topaste = 000
 
 with open('config.json') as config_file:
@@ -18,13 +20,20 @@ bot = commands.Bot(command_prefix='server cloner made by yuxontop on github')
 
 
 
-tocopy = input('guild id you want to copy >> ')
-topaste = input('guild id you want to paste in >> ')
+tocopy = input('server you want to copy : ')
+topaste = input('server you want to paste in : ')
 
 
 scrapped_channel = []
 scrapped_category = []
 scrapped_role = []
+
+def get_overwrite(guild, channel):
+	overwrites_to = {}
+	for key, value in channel.overwrites.items():
+		role = discord.utils.get(guild.roles, name=key.name)
+		overwrites_to[role] = value
+	return overwrites_to
 
 @bot.event
 async def on_ready():
@@ -77,13 +86,24 @@ async def on_ready():
 
 			for category in scrapped_category:
 				try:
-					category_created = await guild.create_category(str(category.name))
+
+					category_created = await guild.create_category(str(category.name), overwrites=get_overwrite(guild, channel))
 					for channel in category.channels:
 						if 'text' in str(channel.type):
-							await guild.create_text_channel(str(channel.name), category=category_created)
+
+						
+
+							try:
+								await guild.create_text_channel(str(channel.name), category=category_created, overwrites=get_overwrite(guild, channel), topic=channel.topic, position=channel.position, slowmode_delay=channel.slowmode_delay, nsfw=channel.nsfw)
+							except:
+								await guild.create_text_channel(str(channel.name), category=category_created, overwrites=get_overwrite(guild, channel))
+
 							print(Fore.GREEN + f'	[+] Pasted Text Channel : {channel.name} in {category.name}')
 						elif 'voice' in str(channel.type):
-							await guild.create_voice_channel(str(channel.name), category=category_created)
+							try:
+								await guild.create_voice_channel(str(channel.name), category=category_created, overwrites=get_overwrite(guild, channel), bitrate=channel.bitrate, user_limit=channel.user_limit)
+							except:
+								await guild.create_voice_channel(str(channel.name), category=category_created, overwrites=get_overwrite(guild, channel))
 							print(Fore.GREEN + f'	[+] Pasted Voice Channel : {channel.name} in {category.name}')
 						else:
 							print(Fore.RED + f'	[X] Error Pasting Channel : {channel.name} in {category.name}')
