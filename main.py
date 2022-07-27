@@ -4,7 +4,6 @@
 import os
 import requests
 import json
-import ascii2text
 from discord.ext import commands
 from colorama import Fore, Back, Style, init
 import discord.utils
